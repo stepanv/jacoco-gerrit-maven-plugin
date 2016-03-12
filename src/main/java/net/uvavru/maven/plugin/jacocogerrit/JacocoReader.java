@@ -75,7 +75,7 @@ public class JacocoReader {
 
                         report(coverage, line, coverageLine);
 
-                        if (instructionCounter.getTotalCount() == 0) {
+                        if (coverageLine.getStatus() == ICounter.EMPTY) {
                             // line was not analyzed
                             continue;
                         }
