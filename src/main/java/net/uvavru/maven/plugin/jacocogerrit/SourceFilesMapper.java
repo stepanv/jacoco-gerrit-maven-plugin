@@ -1,5 +1,6 @@
 package net.uvavru.maven.plugin.jacocogerrit;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -80,7 +81,8 @@ public class SourceFilesMapper {
                 if (!Files.exists(sourcePath)) {
                     filesNotFound.add(relativeSourceFilePath);
                     logErrorOrWarning(
-                            "File '{}' is not relative to the basedir '{}' of maven project '{}'). Filepath '{}' does not exist!",
+                            "File '{}' is not relative to the basedir '{}' of maven project '{}'). Filepath '{}' does not exist! "
+                                    + "To override this error, set 'overrideSourceFileNotFoundError' option to 'true'",
                             relativeSourceFilePath,
                             mavenProjectParent.getBasedir(),
                             mavenProjectParent.getName(),
@@ -93,7 +95,9 @@ public class SourceFilesMapper {
         if (!filesNotFound.isEmpty() && !mojo.isOverrideSourceFileNotFoundError()) {
             Utils.logErrorAndThrow(LOGGER, MojoFailureException::new,
                                    "Some files where not found in the project! Files: " + filesNotFound.stream().collect(
-                                           Collectors.joining(", ")));
+                                           Collectors.joining(", ")),
+                                   new FileNotFoundException(
+                                           "Files not found, use 'overrideSourceFileNotFoundError' to override this error."));
         }
 
         return scanMap;
