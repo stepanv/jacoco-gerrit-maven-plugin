@@ -3,9 +3,12 @@ package net.uvavru.maven.plugin.jacocogerrit.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlElement;
+
 public class FileCoverageInput {
     private Map<Integer, Integer> hits = new HashMap<>();
     private Map<Integer, Integer> conditions = new HashMap<>();
+    @XmlElement(name = "covered_conditions")
     private Map<Integer, Integer> coveredConditions = new HashMap<>();
 
     @Override
