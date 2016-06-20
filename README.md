@@ -1,5 +1,10 @@
 # JaCoCo to Gerrit Maven plugin
 
+JaCoCo to Gerrit Maven plugin enables your Gerrit with test code coverage visible as an editor's gutter.<br/>
+![Gerrit Test Code Coverage Gutter Example](docs/images/code-coverage.png)
+
+## What it does
+
 This maven plugin collects test line coverage for files changed in a particular Gerrit changset and uploads the results to Gerrit. However, following tweaks need to be in place
   
   - Gerrit fork <https://github.com/stepanv/gerrit/tree/v2.12-coverage-css> which adds CSSs support on top of [another fork of Gerrit](https://github.com/muryoh/gerrit/tree/v2.12-coverage)
